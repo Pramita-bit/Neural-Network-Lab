@@ -5,8 +5,8 @@ This is a personal learning laboratory where I document my journey to explore th
 This is not a readymade framework, rather its aim is to track my progress over time as my understanding improves. 
 
 ## Progress Log:
-- [ ] Dense Layers
-- [ ] ReLU Activation
+- [x] Dense Layers
+- [x] ReLU Activation
 - [ ] Softmax Activation
 - [ ] Categorical Cross-Entropy Loss
 - [ ] Backpropagation
