@@ -7,7 +7,7 @@ This is not a readymade framework, rather its aim is to track my progress over t
 ## Progress Log:
 - [x] Dense Layers
 - [x] ReLU Activation
-- [ ] Softmax Activation
+- [x] Softmax Activation
 - [ ] Categorical Cross-Entropy Loss
 - [ ] Backpropagation
 - [ ] Gradient Descent
