@@ -1,16 +1,16 @@
 # Importing modules
 import numpy as np
 import nnfs
-from nnfs.datasets import spiral_data
+from nnfs.datasets import spiral_data ## [nnfs stands for 'neural network from scratch'. This is a package that allows using non-linear spiral data]
 nnfs.init()
 
 # Initial Framework
 class artificial_neuron:
     def __init__(self, inputs, neurons):
-        self.weights = 0.01 * np.random.rand(inputs, neurons)
-        self.bias = np.zeros((1, neurons))
+        self.weights = 0.01 * np.random.rand(inputs, neurons) ## [multiplying 0.01 to keep the weights small]
+        self.bias = np.zeros((1, neurons)) ## [setting bias as 0 initially, so that the network will put unbiased importance to each neuron]
     def forward (self, inputs):
-        self.output = np.dot(inputs, self.weights)+self.bias
+        self.output = np.dot(inputs, self.weights)+self.bias ## [the base formula of ANN]
 
 # Rectified Linear Activation Function
 class activation_ReLU:
