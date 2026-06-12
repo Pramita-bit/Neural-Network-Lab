@@ -79,6 +79,7 @@ loss_function = CrossCategoricalEntropy()
 loss = loss_function.calculate(activation2.output,y)
 print('Loss:', loss)
 
+# Calculatibg Accuracy
 accuracy_function = Accuracy()
 accuracy = accuracy_function.calculate(activation2.output,y)
 print('Accuracy:', accuracy)
