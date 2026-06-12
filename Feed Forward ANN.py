@@ -1,17 +1,16 @@
 # Importing modules
 import numpy as np
 import nnfs
-from nnfs.datasets import spiral_data ## [nnfs stands for 'neural network from scratch'. This is a package that allows using non-linear spiral data.]
+from nnfs.datasets import spiral_data
 nnfs.init()
-
 
 # Initial Framework
 class artificial_neuron:
-    def __init__(self, inputs, neurons): 
-        self.weights = 0.01 * np.random.rand(inputs, neurons) ## [multiplying 0.01 to keep the weights small.]
-        self.bias = np.zeros((1, neurons)) ## [setting bias as zero initially, so that the network will put equal values to each neuron]
+    def __init__(self, inputs, neurons):
+        self.weights = 0.01 * np.random.rand(inputs, neurons)
+        self.bias = np.zeros((1, neurons))
     def forward (self, inputs):
-        self.output = np.dot(inputs, self.weights)+self.bias ## [the base formula of an ANN]
+        self.output = np.dot(inputs, self.weights)+self.bias
 
 # Rectified Linear Activation Function
 class activation_ReLU:
@@ -45,6 +44,17 @@ class CrossCategoricalEntropy(Loss):
         negative_log = -np.log(confidence)
         return negative_log
     
+# Accuracy check
+class Accuracy:
+    def calculate(self, output, y_true):
+        prediction = np.argmax(output, axis=1)
+        accuracy = np.mean(prediction==y_true)
+
+        if len(y_true.shape) == 2:
+            y_true = np.argmax(y_true, axis=1)
+            
+        return accuracy
+
 
 X , y = spiral_data(samples=100, classes=3)
 
@@ -68,3 +78,7 @@ print(activation2.output)
 loss_function = CrossCategoricalEntropy()
 loss = loss_function.calculate(activation2.output,y)
 print('Loss:', loss)
+
+accuracy_function = Accuracy()
+accuracy = accuracy_function.calculate(activation2.output,y)
+print('Accuracy:', accuracy)
