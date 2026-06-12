@@ -9,6 +9,7 @@ This is not a readymade framework, rather its aim is to track my progress over t
 - [x] ReLU Activation
 - [x] Softmax Activation
 - [x] Categorical Cross-Entropy Loss
+- [x] Accuracy Check
 - [ ] Backpropagation
 - [ ] Gradient Descent
 - [ ] Optimization
