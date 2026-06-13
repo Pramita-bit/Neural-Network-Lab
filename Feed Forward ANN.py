@@ -17,6 +17,12 @@ class activation_ReLU:
     def forward(self, inputs):
         self.output = np.maximum(0,inputs)
 
+# Sigmoid Function
+class activation_sigmoid:
+    def forward(self,inputs):
+        exponential = np.exp(-inputs)
+        self.output = 1/(1+exponential)
+
 # Softmax Activation Function
 class activation_Softmax:
     def forward(self, inputs):
@@ -62,24 +68,29 @@ X , y = spiral_data(samples=100, classes=3)
 layer1 = artificial_neuron(2,9)
 activation1 = activation_ReLU()
 
-layer2 = artificial_neuron(9,3)
-activation2 = activation_Softmax()
+layer2 = artificial_neuron(9,9)
+activation2 = activation_sigmoid()
+
+layer3 = artificial_neuron(9,3)
+activation3 = activation_Softmax()
 
 # Relating to each other
 layer1.forward(X)
 activation1.forward(layer1.output)
 layer2.forward(activation1.output)
 activation2.forward(layer2.output)
+layer3.forward(activation2.output)
+activation3.forward(layer3.output)
 
 # Output
 print(activation2.output)
 
 # Calculating Loss
 loss_function = CrossCategoricalEntropy()
-loss = loss_function.calculate(activation2.output,y)
+loss = loss_function.calculate(activation3.output,y)
 print('Loss:', loss)
 
 # Calculatibg Accuracy
 accuracy_function = Accuracy()
-accuracy = accuracy_function.calculate(activation2.output,y)
+accuracy = accuracy_function.calculate(activation3.output,y)
 print('Accuracy:', accuracy)
