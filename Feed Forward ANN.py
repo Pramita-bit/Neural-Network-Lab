@@ -13,7 +13,7 @@ class artificial_neuron:
         self.output = np.dot(inputs, self.weights)+self.bias ## [the base formula of ANN]
 
 # Rectified Linear Activation Function
-class activation_ReLU:
+class activation_ReLU:+
     def forward(self, inputs):
         self.output = np.maximum(0,inputs)
 
@@ -26,7 +26,7 @@ class activation_sigmoid:
 # Softmax Activation Function
 class activation_Softmax:
     def forward(self, inputs):
-        exponential = np.exp(inputs - np.max(inputs, axis=1, keepdims=True))
+        exponential = np.exp(inputs - np.max(inputs, axis=1, keepdims=True)) ## [keepdims keeps the dimension 1]
         probabilities = exponential/np.sum(exponential, axis=1, keepdims=True)
         self.output = probabilities
 
@@ -37,14 +37,14 @@ class Loss:
         data_loss = np.mean(sample_loss)
         return data_loss
 
-class CrossCategoricalEntropy(Loss):
+class CrossCategoricalEntropy(Loss): ## [Inherited class]
     def forward(self, y_pred, y_true):
         sample = len(y_pred)
-        y_pred_clipped = np.clip(y_pred, 1e-7, 1-1e-7)
+        y_pred_clipped = np.clip(y_pred, 1e-7, 1-1e-7) ## [ clippping the values between this range to prevent it to be 0, otherwise it will cause an error with infinity]
 
         if len(y_true.shape) == 1:
             confidence = y_pred_clipped[range(sample), y_true] 
-        elif len(y_true.shape) == 2:
+        elif len(y_true.shape) == 2: ## [if the values are one-hot encoded]
             confidence = np.sum(y_pred_clipped * y_true ,axis =1)
 
         negative_log = -np.log(confidence)
@@ -53,8 +53,8 @@ class CrossCategoricalEntropy(Loss):
 # Accuracy check
 class Accuracy:
     def calculate(self, output, y_true):
-        prediction = np.argmax(output, axis=1)
-        accuracy = np.mean(prediction==y_true)
+        prediction = np.argmax(output, axis=1) ## [argmax considers the maximum value: here row-wise]
+        accuracy = np.mean(prediction==y_true) ## [from the mean the likelyhood of prediction being similar to the true values can be obtained]
 
         if len(y_true.shape) == 2:
             y_true = np.argmax(y_true, axis=1)
